@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-class CheckoutActivity extends AppCompatActivity {
+public class CheckoutActivity extends AppCompatActivity {
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
