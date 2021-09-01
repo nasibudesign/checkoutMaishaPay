@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         payButton.setOnClickListener(v -> {
             Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
+            //checkout with repository
 //            Checkout.maishaPay(this,
 //                    "",
 //                    "",
