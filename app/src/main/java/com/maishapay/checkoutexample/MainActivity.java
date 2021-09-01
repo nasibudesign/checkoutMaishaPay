@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.maishapay.checkout.MaishaPay;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,19 +30,20 @@ public class MainActivity extends AppCompatActivity {
 
         payButton.setOnClickListener(v -> {
             Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-            //checkout with repository
-//            Checkout.maishaPay(this,
-//                    "",
-//                    "",
-//                    "1",
-//                    _amount,
-//                    "USD",
-//                    "",
-//                    "",
-//                    "",
-//                    "",
-//                    ""
-//            );
+
+
+            MaishaPay.checkout(this,
+                    "",
+                    "",
+                    "1",
+                    _amount,
+                    "USD",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+            );
         });
     }
 }
