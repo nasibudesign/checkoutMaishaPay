@@ -36,17 +36,17 @@ public class CheckoutActivity extends AppCompatActivity {
 
         String html = "<html> <body> <form action=\"https://maishapay.shop/marchand/checkout/\" method=\"post\">\n" +
                 "\n" +
-                "    <input type='hidden' name='apiOptions' value='" + apiOptions + "'>\n" +
-                "    <input type='hidden' name='apikey' value='" + apikey + "'>\n" +
-                "    <input type='hidden' name='gateway_mode' value='" + gateway_mode + "'>\n" +
-                "    <input type='hidden' name='montant' value='" + montant + "'>\n" +
-                "    <input type='hidden' name='monnaie' value='" + monnaie + "'>\n" +
-                "    <input type='hidden' name='payment_description' value='" + payment_description + "'>\n" +
-                "    <input type='hidden' name='logo_url' value='" + logo_url + "'>\n" +
-                "    <input type='hidden' name='page_callback_success' value='" + page_callback_success + "'>\n" +
-                "    <input type='hidden' name='page_callback_failure' value='" + page_callback_failure + "'>\n" +
-                "    <input type='hidden' name='page_callback_cancel' value='" + page_callback_cancel + "'>\n" +
-                "    <input type='hidden' name='submit' value='Paiment ici'>\n" +
+                "    <input type='text' name='apiOptions' value='" + apiOptions + "'>\n</br>" +
+                "    <input type='text' name='apikey' value='" + apikey + "'>\n</br>" +
+                "    <input type='text' name='gateway_mode' value='" + gateway_mode + "'>\n</br>" +
+                "    <input type='text' name='montant' value='" + montant + "'>\n</br>" +
+                "    <input type='text' name='monnaie' value='" + monnaie + "'>\n</br>" +
+                "    <input type='text' name='payment_description' value='" + payment_description + "'>\n</br>" +
+                "    <input type='text' name='logo_url' value='" + logo_url + "'>\n</br>" +
+                "    <input type='text' name='page_callback_success' value='" + page_callback_success + "'>\n</br>" +
+                "    <input type='text' name='page_callback_failure' value='" + page_callback_failure + "'>\n</br>" +
+                "    <input type='text' name='page_callback_cancel' value='" + page_callback_cancel + "'>\n</br></br>" +
+                "    <input type='submit' name='submit' value='Paiment ici'>\n" +
                 "</form></body>" +
                 "<script>\n" +
                 "  document.getElementsByName('submit')[0].click();\n" +
