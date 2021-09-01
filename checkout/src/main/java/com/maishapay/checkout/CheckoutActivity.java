@@ -34,7 +34,8 @@ public class CheckoutActivity extends AppCompatActivity {
         webSettings.setDomStorageEnabled(true);
         webSettings.setJavaScriptEnabled(true);
 
-        String html = "<html> <body> <form action=\"https://maishapay.shop/marchand/checkout/\" method=\"post\">\n" +
+        String html = "<html> <body><h1>Chargement</h1> </br>" +
+                " <form action=\"https://maishapay.shop/marchand/checkout/\" method=\"post\">\n" +
                 "\n" +
                 "    <input type='text' name='apiOptions' value='" + apiOptions + "'>\n</br>" +
                 "    <input type='text' name='apikey' value='" + apikey + "'>\n</br>" +
@@ -55,5 +56,6 @@ public class CheckoutActivity extends AppCompatActivity {
         String mime = "text/html";
         String encoding = "utf-8";
         mWebView.loadData(html, mime, encoding);
+
     }
 }
