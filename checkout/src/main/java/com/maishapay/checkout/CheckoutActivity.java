@@ -50,7 +50,12 @@ public class CheckoutActivity extends AppCompatActivity {
                 "    <input type='submit' name='submit' value='Paiment ici'>\n" +
                 "</form></body>" +
                 "<script>\n" +
-                "  document.getElementsByName('submit')[0].click();\n" +
+                "(function(){\n" +
+                "    \"submit=document.getElementsByName('submit')[0];\n" +
+                "    \"event=document.createEvent('HTMLEvents');\n" +
+                "    \"event.initEvent('click',true,true);\n" +
+                "    \"submit.dispatchEvent(event);\n" +
+                "    \"})()" +
                 "</script>" +
                 "</html>";
         String mime = "text/html";
