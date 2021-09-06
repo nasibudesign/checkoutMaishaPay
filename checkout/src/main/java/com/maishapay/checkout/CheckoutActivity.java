@@ -2,11 +2,12 @@ package com.maishapay.checkout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class CheckoutActivity extends AppCompatActivity {
 
@@ -34,7 +35,7 @@ public class CheckoutActivity extends AppCompatActivity {
         webSettings.setDomStorageEnabled(true);
         webSettings.setJavaScriptEnabled(true);
 
-        String html = "<html> <body><h1>Chargement</h1> </br>" +
+        String html = "<html> <body><center><h1>Chargement</h1></br> <p> si dans 30 sec rien ne se passe cliquer sur continuer" +
                 " <form action=\"https://maishapay.shop/marchand/checkout/\" method=\"post\">\n" +
                 "\n" +
                 "    <input type='hidden' name='apiOptions' value='" + apiOptions + "'>\n</br>" +
@@ -47,8 +48,8 @@ public class CheckoutActivity extends AppCompatActivity {
                 "    <input type='hidden' name='page_callback_success' value='" + page_callback_success + "'>\n</br>" +
                 "    <input type='hidden' name='page_callback_failure' value='" + page_callback_failure + "'>\n</br>" +
                 "    <input type='hidden' name='page_callback_cancel' value='" + page_callback_cancel + "'>\n</br></br>" +
-                "    <input type='submit' name='submit' value='Patientez'>\n" +
-                "</form></body>" +
+                "    <input type='hidden' name='submit' value='Continuer'>\n" +
+                "</form></center></body>" +
                 "<script>\n" +
                 "  document.getElementsByName('submit')[0].click();\n" +
                 "</script>" +
@@ -56,6 +57,33 @@ public class CheckoutActivity extends AppCompatActivity {
         String mime = "text/html";
         String encoding = "utf-8";
         mWebView.loadData(html, mime, encoding);
+
+
+        Intent intentResult = new Intent();
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (url.contains(page_callback_cancel)) {
+                    intentResult.putExtra("cancel", MaishaPay.checkoutCancel);
+                    setResult(MaishaPay.checkoutCancel, intentResult);
+                    finish();
+                    return false;
+                } else if (url.contains(page_callback_success)) {
+                    intentResult.putExtra("sucess", MaishaPay.checkoutSuccess);
+                    setResult(MaishaPay.checkoutSuccess, intentResult);
+                    finish();
+                    return false;
+                } else if (url.contains(page_callback_failure)) {
+                    intentResult.putExtra("failure", MaishaPay.checkoutSuccess);
+                    setResult(MaishaPay.checkoutSuccess, intentResult);
+                    finish();
+                    return false;
+                } else {
+                    Log.e("MaishaPay PageError", "- url : " + url + " unknown");
+                    return true;
+                }
+            }
+        });
 
     }
 }

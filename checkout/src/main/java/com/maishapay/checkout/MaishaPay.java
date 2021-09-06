@@ -1,10 +1,20 @@
 package com.maishapay.checkout;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 
 public class MaishaPay {
-    public static void checkout(Context context,
+
+    private static final int code = 230021282;
+    private static final int codeCheckoutSuccess = 1;
+    private static final int codeCheckoutFailure = 0;
+    private static final int codeCheckoutCancel = -1;
+    public static final int maishaPayCheckoutActivityRequestCode = code;
+    public static final int checkoutSuccess = codeCheckoutSuccess;
+    public static final int checkoutFailure = codeCheckoutFailure;
+    public static final int checkoutCancel = codeCheckoutCancel;
+
+    public static void checkout(Activity parentActivity,
                                 String apiOptions,
                                 String apikey,
                                 String gateway_mode,
@@ -16,7 +26,7 @@ public class MaishaPay {
                                 String page_callback_failure,
                                 String page_callback_cancel) {
 
-        Intent intent = new Intent(context, CheckoutActivity.class);
+        Intent intent = new Intent(parentActivity, CheckoutActivity.class);
         intent.putExtra("apiOptions", apiOptions);
         intent.putExtra("apikey", apikey);
         intent.putExtra("gateway_mode", gateway_mode);
@@ -27,6 +37,6 @@ public class MaishaPay {
         intent.putExtra("page_callback_success", page_callback_success);
         intent.putExtra("page_callback_failure", page_callback_failure);
         intent.putExtra("page_callback_cancel", page_callback_cancel);
-        context.startActivity(intent);
+        parentActivity.startActivityForResult(intent, maishaPayCheckoutActivityRequestCode);
     }
 }
