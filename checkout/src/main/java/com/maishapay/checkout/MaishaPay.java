@@ -13,6 +13,8 @@ public class MaishaPay {
     public static final int checkoutSuccess = codeCheckoutSuccess;
     public static final int checkoutFailure = codeCheckoutFailure;
     public static final int checkoutCancel = codeCheckoutCancel;
+    public static final String USD = "USD";
+    public static final String CDF = "CDF";
 
     public static void checkout(Activity parentActivity,
                                 String apiOptions,
@@ -25,7 +27,6 @@ public class MaishaPay {
                                 String page_callback_success,
                                 String page_callback_failure,
                                 String page_callback_cancel) {
-
         Intent intent = new Intent(parentActivity, CheckoutActivity.class);
         intent.putExtra("apiOptions", apiOptions);
         intent.putExtra("apikey", apikey);

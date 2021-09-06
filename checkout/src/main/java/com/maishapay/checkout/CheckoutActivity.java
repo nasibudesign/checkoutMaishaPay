@@ -76,11 +76,11 @@ public class CheckoutActivity extends AppCompatActivity {
                     return false;
                 } else if (url.contains(page_callback_failure)) {
                     intentResult.putExtra("failure", MaishaPay.checkoutSuccess);
-                    setResult(MaishaPay.checkoutSuccess, intentResult);
+                    setResult(MaishaPay.checkoutFailure, intentResult);
                     finish();
                     return false;
                 } else {
-                    Log.e("MaishaPay PageError", "- url : " + url + " unknown");
+                    Log.e("MaishaPay PageCallback", "- url : " + url + " is an unrecognized page_callback");
                     return true;
                 }
             }
