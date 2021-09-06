@@ -8,27 +8,26 @@ Step 1. Add it in your root build.gradle at the end of repositories:
 	}
 
 Step 2. Add the dependency
-    check for newer versions on git repo.
 
 	dependencies {
-	        implementation 'com.github.nasibudesign:checkoutMaishaPay:0.06'
+	        implementation 'com.github.nasibudesign:checkoutMaishaPay:0.05'
 	}
 
-    
+    check for newer versions on git repo.
 
-Step 3. call MaishaPay checkout to your 
+Step 3. call checkout methode on items to make payement
      
      MaishaPay.checkout(this,
-                        yourApiOptions,
-                        yourApiKey,
-                        yourGateway_mode,
-                        _amount,
-                        "USD",
-                        "test de payement",
-                        Const.logo_url,
-                        "https://maishapay.net",
-                        "https://google.com",
-                        "https://yahoo.com"
+                        "yourApiOptions",
+                        "yourApiKey",
+                        "yourGateway_mode",
+                        "amount",
+                        MaishaPay.USD,
+                        "Description",
+                        "yourLogo_url",
+                        "page_callback_success",
+                        "page_callback_failure",
+                        "page_callback_cancel"
                 );
 
 Step 4. on your activity or fragment overide onActivityResult,
