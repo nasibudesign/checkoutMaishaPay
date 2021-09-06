@@ -35,7 +35,7 @@ public class CheckoutActivity extends AppCompatActivity {
         webSettings.setDomStorageEnabled(true);
         webSettings.setJavaScriptEnabled(true);
 
-        String html = "<html> <body><center><h1>Chargement</h1></br> <p> si dans 30 sec rien ne se passe cliquer sur continuer" +
+        String html = "<html> <body><center><h1>Chargement</h1> </br>" +
                 " <form action=\"https://maishapay.shop/marchand/checkout/\" method=\"post\">\n" +
                 "\n" +
                 "    <input type='hidden' name='apiOptions' value='" + apiOptions + "'>\n</br>" +
@@ -48,8 +48,9 @@ public class CheckoutActivity extends AppCompatActivity {
                 "    <input type='hidden' name='page_callback_success' value='" + page_callback_success + "'>\n</br>" +
                 "    <input type='hidden' name='page_callback_failure' value='" + page_callback_failure + "'>\n</br>" +
                 "    <input type='hidden' name='page_callback_cancel' value='" + page_callback_cancel + "'>\n</br></br>" +
-                "    <input type='hidden' name='submit' value='Continuer'>\n" +
-                "</form></center></body>" +
+                "    <p>Si dans 30 sec rien ne se passe cliquer sur continuer</p></br>" +
+                "    <input type='submit' name='submit' value='Continuer'>\n" +
+                "</form></body></center>" +
                 "<script>\n" +
                 "  document.getElementsByName('submit')[0].click();\n" +
                 "</script>" +
