@@ -7,13 +7,13 @@ Step 1. Add it in your root build.gradle at the end of repositories:
 		}
 	}
 
-Step 2. Add the dependency
+Step 2. Add the dependency & check for latest versions.
 
 	dependencies {
-	        implementation 'com.github.nasibudesign:checkoutMaishaPay:0.05'
+	        implementation 'com.github.nasibudesign:checkoutMaishaPay:0.06'
 	}
 
-    check for newer versions on git repo.
+   
 
 Step 3. call checkout methode on items to make payement
      
