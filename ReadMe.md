@@ -36,9 +36,6 @@ Step 4. on your activity or fragment overide onActivityResult,
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Log.e("requestCode", requestCode + "");
-        Log.e("resultCode", resultCode + "");
-
         if (requestCode == MaishaPay.maishaPayCheckoutActivityRequestCode) {
             if (resultCode == MaishaPay.checkoutSuccess) {
                 Log.e("succes", MaishaPay.checkoutSuccess + "");
