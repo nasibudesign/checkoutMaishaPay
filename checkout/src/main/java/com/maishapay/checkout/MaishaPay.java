@@ -13,6 +13,9 @@ public class MaishaPay {
     public static final int checkoutSuccess = codeCheckoutSuccess;
     public static final int checkoutFailure = codeCheckoutFailure;
     public static final int checkoutCancel = codeCheckoutCancel;
+    private static final String page_callback_success = "https://www.maishapay.shop/marchand/pay/suucess.php";
+    private static final String page_callback_failure = "https://www.maishapay.shop/marchand/pay/echec.php";
+    private static final String page_callback_cancel = "https://maishapay.net";
     public static final String USD = "USD";
     public static final String CDF = "CDF";
 
@@ -23,10 +26,7 @@ public class MaishaPay {
                                 String montant,
                                 String monnaie,
                                 String payment_description,
-                                String logo_url,
-                                String page_callback_success,
-                                String page_callback_failure,
-                                String page_callback_cancel) {
+                                String logo_url) {
         Intent intent = new Intent(parentActivity, CheckoutActivity.class);
         intent.putExtra("apiOptions", apiOptions);
         intent.putExtra("apikey", apikey);
