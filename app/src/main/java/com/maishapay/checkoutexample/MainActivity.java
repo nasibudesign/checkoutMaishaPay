@@ -35,16 +35,13 @@ public class MainActivity extends AppCompatActivity {
             if (!amount.isEmpty()) {
                 Toast.makeText(this, "chargemtent", Toast.LENGTH_SHORT).show();
                 MaishaPay.checkout(this,
-                        "Const.yourApiOptions",
-                        "Const.yourApiKey",
-                        "Const.yourGateway_mode",
+                        Const.yourApiOptions,
+                        Const.yourApiKey,
+                        Const.yourGateway_mode,
                         amount,
                         MaishaPay.USD,
                         "Description de payement",
-                        "Const.yourLogo_url",
-                        "Const.page_callback_success",
-                        "Const.page_callback_failure",
-                        "Const.page_callback_cancel"
+                        Const.yourLogo_url
                 );
             } else {
                 Toast.makeText(this, "paramettre manquant", Toast.LENGTH_SHORT).show();

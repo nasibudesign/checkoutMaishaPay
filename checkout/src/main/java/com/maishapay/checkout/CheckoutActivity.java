@@ -81,7 +81,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     return false;
                 } else {
                     Log.e("MaishaPay PageCallback", "- url : " + url + " is an unrecognized page_callback");
-                    return true;
+                    return false;
                 }
             }
         });
