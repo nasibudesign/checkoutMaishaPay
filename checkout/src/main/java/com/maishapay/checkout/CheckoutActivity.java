@@ -75,7 +75,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     finish();
                     return false;
                 } else if (url.contains(page_callback_failure)) {
-                    intentResult.putExtra("failure", MaishaPay.checkoutSuccess);
+                    intentResult.putExtra("failure", MaishaPay.checkoutFailure);
                     setResult(MaishaPay.checkoutFailure, intentResult);
                     finish();
                     return false;
