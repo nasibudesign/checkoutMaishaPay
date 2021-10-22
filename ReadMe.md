@@ -10,7 +10,7 @@ Step 1. Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency & check for latest versions.
 
 	dependencies {
-            implementation 'com.github.nasibudesign:checkoutMaishaPay:v0.9.0'
+            implementation 'com.github.nasibudesign:checkoutMaishaPay:v0.9.1'
 	}
 
    
@@ -25,6 +25,7 @@ Step 3. call checkout methode on items to make payement
                         MaishaPay.USD,
                         "Description",
                         "yourLogo_url"
+                        "BackPressToastMessage"
                 );
 
 Step 4. on your activity or fragment overide onActivityResult,

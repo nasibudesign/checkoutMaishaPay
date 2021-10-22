@@ -2,16 +2,23 @@ package com.maishapay.checkout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 public class CheckoutActivity extends AppCompatActivity {
 
 
+    Intent intentResult;
+    String backPressedMessage;
+
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +35,11 @@ public class CheckoutActivity extends AppCompatActivity {
         String page_callback_success = intent.getExtras().getString("page_callback_success");
         String page_callback_failure = intent.getExtras().getString("page_callback_failure");
         String page_callback_cancel = intent.getExtras().getString("page_callback_cancel");
+        backPressedMessage = intent.getExtras().getString("backPressedMessage");
+
 
         WebView mWebView = findViewById(R.id.checoutWebView);
+
 
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setDomStorageEnabled(true);
@@ -60,8 +70,16 @@ public class CheckoutActivity extends AppCompatActivity {
         mWebView.loadData(html, mime, encoding);
 
 
-        Intent intentResult = new Intent();
+        intentResult = new Intent();
         mWebView.setWebViewClient(new WebViewClient() {
+
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                checkPageCallBackAndExit(url);
+            }
+
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (url.contains(page_callback_cancel)) {
@@ -85,6 +103,40 @@ public class CheckoutActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+
+    private void checkPageCallBackAndExit(String url) {
+        Log.i("url loaded", url);
+        String APPROVE_URL = "https://www.maishapay.shop/marchand/pay/suucess.php?op=visa";
+        String CANCEL_URL = "https://www.maishapay.shop/marchand/pay/echec.php?op=visa";
+        String DECLINE_URL = "https://www.maishapay.shop/marchand/pay/echec.php";
+        if (url.contains(CANCEL_URL)) {
+            intentResult.putExtra("cancel", MaishaPay.checkoutCancel);
+            setResult(MaishaPay.checkoutCancel, intentResult);
+            finish();
+
+        } else if (url.contains(APPROVE_URL)) {
+            intentResult.putExtra("sucess", MaishaPay.checkoutSuccess);
+            setResult(MaishaPay.checkoutSuccess, intentResult);
+            finish();
+
+        } else if (url.contains(DECLINE_URL)) {
+            intentResult.putExtra("failure", MaishaPay.checkoutFailure);
+            setResult(MaishaPay.checkoutFailure, intentResult);
+            finish();
+        } else {
+            Log.e("MaishaPay PageCallback", "- url : " + url + " is an unrecognized page_callback");
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if(backPressedMessage!=null)
+        Toast.makeText(getApplicationContext(), backPressedMessage, Toast.LENGTH_SHORT).show();
+        //super.onBackPressed();
 
     }
 }

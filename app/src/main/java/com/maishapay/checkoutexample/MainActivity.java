@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
                         amount,
                         moneySelected,
                         description,
-                        Const.yourLogo_url
+                        Const.yourLogo_url,
+                        null
                 );
             } else {
                 Toast.makeText(this, "paramettre manquant", Toast.LENGTH_SHORT).show();

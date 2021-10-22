@@ -26,7 +26,8 @@ public class MaishaPay {
                                 String montant,
                                 String monnaie,
                                 String payment_description,
-                                String logo_url) {
+                                String logo_url,
+                                String backPressedToastMessage) {
         Intent intent = new Intent(parentActivity, CheckoutActivity.class);
         intent.putExtra("apiOptions", apiOptions);
         intent.putExtra("apikey", apikey);
@@ -38,6 +39,7 @@ public class MaishaPay {
         intent.putExtra("page_callback_success", page_callback_success);
         intent.putExtra("page_callback_failure", page_callback_failure);
         intent.putExtra("page_callback_cancel", page_callback_cancel);
+        intent.putExtra("backPressedMessage",backPressedToastMessage);
         parentActivity.startActivityForResult(intent, maishaPayCheckoutActivityRequestCode);
     }
 }
