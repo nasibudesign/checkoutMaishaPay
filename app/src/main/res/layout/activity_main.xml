@@ -7,94 +7,137 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="#ffffff"
-        app:cardCornerRadius="8dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:stretchColumns="1">
+            android:orientation="vertical">
 
-            <TableRow>
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="#ffffff"
+                app:cardCornerRadius="8dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="apiKey" />
-
-                <EditText
-                    android:id="@+id/apiKey"
+                <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="gateway_mode" />
+                    android:padding="16dp"
+                    android:stretchColumns="1">
 
-                <EditText
-                    android:id="@+id/gateway_mode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </TableRow>
+                    <TableRow>
 
-            <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="?actionBarSize"
+                            android:text="apiKey" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="montant" />
+                        <TextView
+                            android:id="@+id/apiKey"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </TableRow>
 
-                <EditText
-                    android:id="@+id/montant"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </TableRow>
+                    <TableRow>
 
-            <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="?actionBarSize"
+                            android:text="gateway_mode" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="monnaie" />
+                        <TextView
+                            android:id="@+id/gateway_mode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </TableRow>
 
-                <EditText
-                    android:id="@+id/monnaie"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </TableRow>
+                    <TableRow>
 
-            <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="?actionBarSize"
+                            android:text="montant" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="logo_url" />
+                        <EditText
+                            android:id="@+id/montant"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal" />
+                    </TableRow>
 
-                <EditText
-                    android:id="@+id/logo_url"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </TableRow>
+                    <TableRow>
 
-        </TableLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="?actionBarSize"
+                            android:text="desctiption" />
 
-    </androidx.cardview.widget.CardView>
+                        <EditText
+                            android:id="@+id/description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </TableRow>
 
-    <Button
-        android:id="@+id/payButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Payer avec MaishaPay" />
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="?actionBarSize"
+                            android:text="monaie" />
+
+                        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radio_usd"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:onClick="onRadioButtonClicked" />
+
+                            <RadioButton
+                                android:id="@+id/radio_cdf"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:onClick="onRadioButtonClicked" />
+                        </RadioGroup>
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="?actionBarSize"
+                            android:text="logo_url" />
+
+                        <ImageView
+                            android:id="@+id/logo_url"
+                            android:layout_width="match_parent"
+                            android:minWidth="?actionBarSize"
+                            android:minHeight="?actionBarSize"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:scaleType="fitCenter" />
+                    </TableRow>
 
 
+                </TableLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/payButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Payer avec MaishaPay" />
+
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
