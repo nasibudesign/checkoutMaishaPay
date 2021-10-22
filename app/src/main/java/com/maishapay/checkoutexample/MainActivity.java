@@ -4,34 +4,48 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.maishapay.checkout.MaishaPay;
+import com.maishapay.checkoutexample.databinding.ActivityMainBinding;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText apiKey, gateWayMode, montant, money, logo_url;
-    Button payButton;
+    ActivityMainBinding binding;
+    String moneySelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        apiKey = findViewById(R.id.apiKey);
-        gateWayMode = findViewById(R.id.gateway_mode);
-        montant = findViewById(R.id.montant);
-        money = findViewById(R.id.monnaie);
-        logo_url = findViewById(R.id.logo_url);
+        binding.apiKey.setText(Const.yourApiKey);
+        binding.gatewayMode.setText(Const.yourGateway_mode);
+        String defaultDescription = "Description de payement";
+        binding.description.setText(defaultDescription);
+        binding.radioUsd.setText(MaishaPay.USD);
+        binding.radioCdf.setText(MaishaPay.CDF);
+        setCDFChecked();
 
-        payButton = findViewById(R.id.payButton);
+        Glide.with(this).load(Const.yourLogo_url)
+                .error(R.drawable.ic_baseline_broken_image_24)
+                .into(binding.logoUrl);
 
-        payButton.setOnClickListener(v -> {
-            String amount = montant.getText().toString();
+        binding.payButton.setOnClickListener(v -> {
+            String amount = binding.montant.getText().toString().trim();
+            String description = binding.description.getText().toString().trim();
             if (!amount.isEmpty()) {
                 Toast.makeText(this, "chargemtent", Toast.LENGTH_SHORT).show();
                 MaishaPay.checkout(this,
@@ -39,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
                         Const.yourApiKey,
                         Const.yourGateway_mode,
                         amount,
-                        MaishaPay.USD,
-                        "Description de payement",
+                        moneySelected,
+                        description,
                         Const.yourLogo_url
                 );
             } else {
@@ -57,10 +71,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (requestCode == MaishaPay.maishaPayCheckoutActivityRequestCode) {
             if (resultCode == MaishaPay.checkoutSuccess) {
+                Toast.makeText(this, "checkoutSuccess " + MaishaPay.checkoutSuccess, Toast.LENGTH_SHORT).show();
                 Log.i("succes", MaishaPay.checkoutSuccess + "");
             } else if (resultCode == MaishaPay.checkoutCancel) {
+                Toast.makeText(this, "checkoutCancel " + MaishaPay.checkoutCancel, Toast.LENGTH_SHORT).show();
                 Log.i("cancel", MaishaPay.checkoutCancel + "");
             } else if (resultCode == MaishaPay.checkoutFailure) {
+                Toast.makeText(this, "checkoutFailure " + MaishaPay.checkoutFailure, Toast.LENGTH_SHORT).show();
                 Log.i("failure", MaishaPay.checkoutFailure + "");
             } else {
                 Log.e("unknown", "unknown result");
@@ -69,5 +86,27 @@ public class MainActivity extends AppCompatActivity {
             Log.e("unknown request code", "unknown or other request code");
         }
 
+    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch (view.getId()) {
+            case R.id.radio_cdf:
+                if (checked)
+                    moneySelected = MaishaPay.CDF;
+                break;
+            case R.id.radio_usd:
+                if (checked)
+                    moneySelected = MaishaPay.USD;
+                break;
+        }
+    }
+
+    private void setCDFChecked() {
+        binding.radioCdf.setChecked(true);
+        moneySelected = MaishaPay.CDF;
     }
 }
